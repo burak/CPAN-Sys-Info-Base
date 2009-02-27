@@ -1,0 +1,6 @@
+Revision history for Perl extension Sys::Info::Base.
+
+Time zone is GMT+2.
+
+0.69_01 Fri Feb 27 05:33:38 2009
+    => Separation from Sys::Info.
