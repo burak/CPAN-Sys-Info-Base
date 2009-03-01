@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 use strict;
 use vars qw(%PREREQ);
 use ExtUtils::MakeMaker;
