@@ -21,7 +21,9 @@ is( Sys::Info::Base->trim("  \n\n Foo \n \t \n "), 'Foo', 'trim() works');
 ok( my @f = Sys::Info::Base->read_file(FILE), 'read_file() works' );
 is( $f[0], 'slurp', 'read_file() works' );
 
-is( Sys::Info::Base->date2time('1 Fri Jul 23 20:48:29 CDT 2004'), 1090604909,
-        'date2time() works');
+ok( my $t = Sys::Info::Base->date2time('1 Fri Jul 23 20:48:29 CDT 2004'),
+    'date2time() works');
+
+like( scalar( localtime $t ), qr{Jul .+? 2004}xms, "Got a approximate date" );
 
 1;
