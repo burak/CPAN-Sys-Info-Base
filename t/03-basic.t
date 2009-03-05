@@ -3,7 +3,6 @@ use strict;
 use Test::More qw( no_plan );
 use File::Spec;
 use constant FILE => File::Spec->catfile( qw( t slurp.txt ) );
-use Cwd;
 
 # Sys::Info::Device::CPU
 # Sys::Info::Device
