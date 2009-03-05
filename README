@@ -1,7 +1,7 @@
 Sys::Info::Base
 ===============
 
-Fetch information about the host system.
+Base classes for Sys::Info.
 
 Read the module's POD for documentation.
 See the tests for examples.
@@ -22,10 +22,9 @@ or under Windows:
    nmake test
    nmake install
 
-
 COPYRIGHT
 
-Copyright (c) 2006-2009 Burak Gürsoy. All rights reserved.
+Copyright (c) 2009 Burak Gürsoy. All rights reserved.
 
 LICENSE
 

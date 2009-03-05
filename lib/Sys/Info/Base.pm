@@ -118,7 +118,7 @@ __END__
 
 =head1 NAME
 
-Sys::Info::Base - Base class Sys::Info
+Sys::Info::Base - Base class for Sys::Info
 
 =head1 SYNOPSIS
 
@@ -170,7 +170,7 @@ Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
-Copyright 2006-2008 Burak Gürsoy. All rights reserved.
+Copyright 2006-2009 Burak Gürsoy. All rights reserved.
 
 =head1 LICENSE
 

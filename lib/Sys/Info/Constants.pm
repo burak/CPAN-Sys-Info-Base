@@ -4,7 +4,7 @@ use vars qw( $VERSION @ISA @EXPORT_OK %EXPORT_TAGS );
 use Carp qw( croak );
 use Exporter ();
 
-$VERSION = '0.60';
+$VERSION = '0.69_01';
 
 BEGIN {
     if ( ! defined &OSID ) {
@@ -215,7 +215,7 @@ Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
-Copyright 2006-2008 Burak Gürsoy. All rights reserved.
+Copyright 2006-2009 Burak Gürsoy. All rights reserved.
 
 =head1 LICENSE
 

@@ -11,7 +11,7 @@ WriteMakefile(
    'PREREQ_PM'    => \%PREREQ,
    ($] >= 5.005 ? (
    AUTHOR   => 'Burak Gursoy <burak@cpan.org>',
-   ABSTRACT => 'Fetch information from the host system',
+   ABSTRACT => 'Base classes for Sys::Info',
    ) : ()),
    PL_FILES => {},
 );

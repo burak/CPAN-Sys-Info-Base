@@ -6,7 +6,7 @@ use Carp qw( croak );
 use base qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 
-$VERSION = '0.60';
+$VERSION = '0.69_01';
 
 BEGIN {
     MK_ACCESSORS: {
@@ -89,7 +89,7 @@ Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
-Copyright 2006-2008 Burak Gürsoy. All rights reserved.
+Copyright 2006-2009 Burak Gürsoy. All rights reserved.
 
 =head1 LICENSE
 
