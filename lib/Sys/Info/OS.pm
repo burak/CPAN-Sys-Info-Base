@@ -24,13 +24,13 @@ BEGIN {
                     ;
         *is_win32   = *is_windows
                     = *is_win
-                    = sub { OSID eq 'Windows' }
+                    = sub () { OSID eq 'Windows' }
                     ;
         *is_linux   = *is_lin
-                    = sub { OSID eq 'Linux'   }
+                    = sub () { OSID eq 'Linux'   }
                     ;
-        *is_bsd     = sub { OSID eq 'BSD'     };
-        *is_unknown = sub { OSID eq 'Unknown' };
+        *is_bsd     = sub () { OSID eq 'BSD'     };
+        *is_unknown = sub () { OSID eq 'Unknown' };
         *workgroup  = *{ $class . '::domain_name' };
         *host_name  = *{ $class . '::node_name'   };
         *time_zone  = *{ $class . '::tz'          };
@@ -281,6 +281,10 @@ Synonyms:
 =item is_lin
 
 =back
+
+=head2 is_bsd
+
+Returns true if the os is (free|open|net)bsd.
 
 =head2 is_unknown
 
