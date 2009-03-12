@@ -31,10 +31,12 @@ sub load_module {
     my $class = shift || croak "Which class to load?";
     croak "Invalid class name: $class" if ref $class;
     return $class if $LOAD_MODULE{ $class };
-    my $check = $class;
-    $check =~ tr/a-zA-Z0-9_://d;
+    (my $check = $class) =~ tr/a-zA-Z0-9_://d;
     croak "Invalid class name: $class" if $check;
-    my $file = File::Spec->catfile( split /::/, $class) . '.pm';
+    my @raw_file = split /::/, $class;
+    return $class if exists $INC{ join('/', @raw_file).".pm" };
+    my $file = File::Spec->catfile( @raw_file ) . '.pm';
+    (my $inc_file = $file) =~ tr///;
     eval { require $file; };
     croak "Error loading $class: $@" if $@;
     $LOAD_MODULE{ $class } = 1;
