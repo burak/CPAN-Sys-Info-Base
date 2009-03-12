@@ -29,6 +29,7 @@ BEGIN {
         *is_linux   = *is_lin
                     = sub { OSID eq 'Linux'   }
                     ;
+        *is_bsd     = sub { OSID eq 'BSD'     };
         *is_unknown = sub { OSID eq 'Unknown' };
         *workgroup  = *{ $class . '::domain_name' };
         *host_name  = *{ $class . '::node_name'   };
@@ -218,6 +219,10 @@ vary among different systems.
 
 =head2 product_type
 
+=head2 bitness
+
+If successful, returns the bitness ( C<32> or C<64> ) of the OS. Returns
+false otherwise.
 
 =head2 meta
 

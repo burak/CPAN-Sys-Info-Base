@@ -2,6 +2,9 @@ Revision history for Perl extension Sys::Info::Base.
 
 Time zone is GMT+2.
 
+0.69_03 Thu Mar 12 03:49:58 2009
+    => Remove cache from ::CPU.
+
 0.69_02 Thu Mar  5 02:25:32 2009
     => Fix date2time test.
 

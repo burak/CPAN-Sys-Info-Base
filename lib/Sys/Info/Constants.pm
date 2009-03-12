@@ -8,13 +8,14 @@ $VERSION = '0.69_01';
 
 BEGIN {
     if ( ! defined &OSID ) {
-        my %OS = qw(
-            MSWin32   Windows
-            MSWin64   Windows
-            linux     Linux
+        my %OS = (
+            MSWin32  => 'Windows',
+            MSWin64  => 'Windows',
+            linux    => 'Linux',
+            #darwin   => 'MacOSX',
         );
+        # $OS{ $_ } = 'BSD' for qw( freebsd openbsd netbsd );
         my $ID = $OS{ $^O } || 'Unknown';
-        # use constant OSID => ...;
         *OSID = sub () { "$ID" }
     }
 }

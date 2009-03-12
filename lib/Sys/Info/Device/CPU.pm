@@ -10,6 +10,7 @@ $VERSION = '0.60';
 
 BEGIN {
     push @ISA, __PACKAGE__->load_subclass('Sys::Info::Driver::%s::Device::CPU');
+    # define aliases
     *ht = \&hyper_threading;
 }
 
@@ -18,26 +19,34 @@ sub new {
     my %opt   = scalar(@_) % 2 ? () : (@_);
     my $self  = {
         %opt,
-        CACHE => undef,
+        META_DATA => undef,
     };
     bless $self, $class;
     $self;
 }
 
+sub bitness {
+    my $self = shift;
+    
+}
+
 sub count {
     my $self = shift;
-    $self->identify if not $self->{CACHE};
-    my @cpu = @{ $self->{CACHE} };
+    my $id   = shift || '';
+    my @cpu  = $self->identify;
+    if ( $id ) {
+        croak "Parameter to count($id) if bogus" if $id ne 'cores';
+        # do something
+    }
     return @cpu ? scalar @cpu : undef;
 }
 
 sub hyper_threading {
     my $self = shift;
-    $self->identify if not $self->{CACHE};
     my %test;
     my $logical = 0;
 
-    foreach my $cpu ( @{ $self->{CACHE} } ) {
+    foreach my $cpu ( $self->identify ) {
         $logical++;
         my $noc = $cpu->{number_of_cores};
         my $nol = $cpu->{number_of_logical_processors};
@@ -52,13 +61,12 @@ sub hyper_threading {
     return 0 if $logical < 1;  # failed to fill cache
     my $physical = keys %test;
     return 0 if $physical < 1; # an error occurred somehow
-    return $logical > $physical ? 1 : 0;
+    return $logical > $physical;
 }
 
 sub speed {
     my $self = shift;
-    $self->identify if not $self->{CACHE};
-    my @cpu = @{ $self->{CACHE} };
+    my @cpu  = $self->identify;
     return if !@cpu || !ref($cpu[0]);
     return $cpu[0]->{speed};
 }
@@ -75,17 +83,16 @@ sub load {
 sub _serve_from_cache {
     my $self    = shift;
     my $context = shift;
-    croak "Can not happen: cache is not set" if not $self->{CACHE};
     return if not defined $context; # void context
-    if ( not $context ) { # scalar context
-        # OK for single processor ("name" will be same)
-        my $count = $self->count;
-        $count = undef if $count && $count == 1; # "1 x CPU" is meaningless
-        my $name  = $self->{CACHE}[0] ? $self->{CACHE}[0]{name} : '';
-        return $name if not $count;
-        return "$count x $name";
-    }
-    return @{ $self->{CACHE} };
+    croak "Can not happen: META_DATA is empty" if not $self->{META_DATA};
+    return @{ $self->{META_DATA} } if $context;
+    # scalar context
+    my @cpu = @{ $self->{META_DATA} };
+    # OK for single processor ("name" will be same)
+    my $count = @cpu;
+    my $name  = $cpu[0] ? $cpu[0]->{name} : '';
+    return $name if ! $count || $count == 1;
+    return "$count x $name";
 }
 
 1;
@@ -168,6 +175,11 @@ Returns C<undef> otherwise.
 =head2 count
 
 Returns the number of CPUs (or number of total cores).
+
+=head2 bitness
+
+If successful, returns the bitness ( C<32> or C<64> ) of the CPU. Returns
+false otherwise.
 
 =head2 load [, LEVEL]
 
