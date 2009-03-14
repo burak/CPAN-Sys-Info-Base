@@ -4,7 +4,7 @@ use vars qw( $VERSION @ISA @EXPORT_OK %EXPORT_TAGS );
 use Carp qw( croak );
 use Exporter ();
 
-$VERSION = '0.69_01';
+$VERSION = '0.69_06';
 
 BEGIN {
     if ( ! defined &OSID ) {
@@ -14,7 +14,7 @@ BEGIN {
             linux    => 'Linux',
             #darwin   => 'MacOSX',
         );
-        # $OS{ $_ } = 'BSD' for qw( freebsd openbsd netbsd );
+        $OS{$_} = 'BSD' for qw( freebsd openbsd netbsd );
         my $ID = $OS{ $^O } || 'Unknown';
         *OSID = sub () { "$ID" }
     }

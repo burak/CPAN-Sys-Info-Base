@@ -24,6 +24,6 @@ is( $f[0], 'slurp', 'read_file() works' );
 ok( my $t = Sys::Info::Base->date2time('1 Fri Jul 23 20:48:29 CDT 2004'),
     'date2time() works');
 
-like( scalar( localtime $t ), qr{Jul .+? 2004}xms, "Got a approximate date" );
+like( scalar( localtime $t ), qr{Jul .+? 2004}xms, "Got an approximate date" );
 
 1;
