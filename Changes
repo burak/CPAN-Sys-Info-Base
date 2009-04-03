@@ -2,6 +2,9 @@ Revision history for Perl extension Sys::Info::Base.
 
 Time zone is GMT+2.
 
+0.69_10 Fri Apr  3 22:00:43 2009
+    => Update tests.
+
 0.69_06 Sat Mar 14 15:55:08 2009
     => Add support for BSD driver.
 

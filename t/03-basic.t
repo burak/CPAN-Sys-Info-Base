@@ -11,8 +11,10 @@ use constant FILE => File::Spec->catfile( qw( t slurp.txt ) );
 
 # TODO: interface test for Sys::Info::Constants
 
-use_ok('Sys::Info::Base');
-use_ok('Sys::Info::Driver');
+BEGIN {
+    use_ok('Sys::Info::Base');
+    use_ok('Sys::Info::Driver');
+}
 
 is( Sys::Info::Base->slurp(FILE), 'slurp', 'slurp() works' );
 ok( Sys::Info::Base->load_module('CGI'), 'load_module() works');

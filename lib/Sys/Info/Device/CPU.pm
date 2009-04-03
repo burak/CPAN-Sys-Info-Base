@@ -6,7 +6,7 @@ use base qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 use Carp qw( croak );
 
-$VERSION = '0.60';
+$VERSION = '0.69_10';
 
 BEGIN {
     push @ISA, __PACKAGE__->load_subclass('Sys::Info::Driver::%s::Device::CPU');
@@ -228,7 +228,7 @@ Copyright 2006-2009 Burak Gürsoy. All rights reserved.
 =head1 LICENSE
 
 This library is free software; you can redistribute it and/or modify 
-it under the same terms as Perl itself, either Perl version 5.8.8 or, 
+it under the same terms as Perl itself, either Perl version 5.10.0 or, 
 at your option, any later version of Perl 5 you may have available.
 
 =cut
