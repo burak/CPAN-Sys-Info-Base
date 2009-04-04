@@ -2,6 +2,9 @@ Revision history for Perl extension Sys::Info::Base.
 
 Time zone is GMT+2.
 
+0.69_11 Sat Apr  4 06:06:39 2009
+    => Remove bitness from cpu. This'll be implemented in driver.
+
 0.69_10 Fri Apr  3 22:00:43 2009
     => Update tests.
 

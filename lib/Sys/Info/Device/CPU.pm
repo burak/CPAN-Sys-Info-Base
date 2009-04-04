@@ -25,11 +25,6 @@ sub new {
     $self;
 }
 
-sub bitness {
-    my $self = shift;
-    
-}
-
 sub count {
     my $self = shift;
     my $id   = shift || '';
