@@ -6,7 +6,7 @@ use Carp qw( croak );
 use base qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 
-$VERSION = '0.69_10';
+$VERSION = '0.70';
 
 BEGIN {
     MK_ACCESSORS: {

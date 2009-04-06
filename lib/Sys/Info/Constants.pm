@@ -4,7 +4,7 @@ use vars qw( $VERSION @ISA @EXPORT_OK %EXPORT_TAGS );
 use Carp qw( croak );
 use Exporter ();
 
-$VERSION = '0.69_10';
+$VERSION = '0.70';
 
 BEGIN {
     if ( ! defined &OSID ) {
