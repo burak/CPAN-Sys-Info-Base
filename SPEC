@@ -5,4 +5,9 @@
             repository => 'http://bitbucket.org/burak/cpan-sys-info-base/',
         },
     },
+    meta_merge     => {
+        resources => {
+            repository => 'http://bitbucket.org/burak/cpan-sys-info-base/',
+        },
+    },
 }
