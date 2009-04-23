@@ -1,6 +1,6 @@
 {
-    module_name    => 'Sys::Info::Base',
-    meta_merge => {
+    module_name => 'Sys::Info::Base',
+    meta_merge  => {
         resources => {
             repository => 'http://bitbucket.org/burak/cpan-sys-info-base/',
         },
