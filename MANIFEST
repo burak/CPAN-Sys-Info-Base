@@ -4,15 +4,10 @@ lib/Sys/Info/Device.pm
 lib/Sys/Info/Driver.pm
 lib/Sys/Info/OS.pm
 lib/Sys/Info/Device/CPU.pm
-t/01-pod.t
-t/02-pod-coverage.t
 t/03-basic.t
 t/slurp.txt
-Makefile.PL
 Build.PL
 Changes
 MANIFEST
 README
-PREREQ
-META.yml
-tools/Build.pm
+SPEC
