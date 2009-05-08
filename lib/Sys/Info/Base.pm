@@ -59,11 +59,11 @@ sub slurp { # fetches all data inside a flat file
     my $msgerr = shift || 'I can not open file %s for reading: ';
     my $FH     = IO::File->new;
        $FH->open($file) or croak sprintf($msgerr, $file) . $!;
-    my $slurped;
-    SLURP_SCOPE: {
+    my $slurped = do {
        local $/;
-       chomp($slurped = <$FH>);
-    }
+       my $rv = <$FH>;
+       $rv;
+    };
     close  $FH;
     return $slurped;
 }
