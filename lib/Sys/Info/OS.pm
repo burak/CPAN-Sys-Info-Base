@@ -4,6 +4,7 @@ use vars qw( $VERSION @ISA   );
 use base qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 use Carp qw( croak );
+use POSIX qw(locale_h);
 
 $VERSION = '0.70';
 
@@ -87,6 +88,11 @@ sub ip {
     $ip = $self->SUPER::_ip()
         if $ip && $ip =~ m{ \A 127 }xms && $self->SUPER::can('_ip');
     return $ip;
+}
+
+sub locale {
+    my $self = shift;
+    return setlocale( LC_CTYPE );
 }
 
 1;
@@ -227,7 +233,7 @@ Returns a hash containing various informations about the OS.
 
 =head2 cdkey
 
-
+=head2 locale
 
 =head1 UTILITY METHODS
 
