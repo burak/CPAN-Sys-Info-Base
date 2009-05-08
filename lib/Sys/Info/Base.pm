@@ -166,6 +166,10 @@ Caches all contents of C<FILE> into an array and then returns it.
 
 Converts C<DATE_STRING> into unix timestamp.
 
+=head1 SEE ALSO
+
+L<Sys::Info>.
+
 =head1 AUTHOR
 
 Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>

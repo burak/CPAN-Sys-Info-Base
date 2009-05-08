@@ -210,7 +210,7 @@ otherwise.
 
 =head1 SEE ALSO
 
-L<Sys::Info>, L<Sys::Info::OS>.
+L<Sys::Info>, L<Sys::Info::OS>, L<Sys::Info::Device>.
 
 =head1 AUTHOR
 

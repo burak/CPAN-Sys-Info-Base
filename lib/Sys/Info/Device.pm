@@ -83,6 +83,10 @@ bogus or false.
 If C<DEVICE_ID> has the value of C<available>, then the names of the
 available devices will be returned.
 
+=head1 SEE ALSO
+
+L<Sys::Info::Device::CPU>, L<Sys::Info>.
+
 =head1 AUTHOR
 
 Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>

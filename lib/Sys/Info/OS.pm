@@ -349,6 +349,7 @@ I<access is denied> error.
 
 L<Win32>, L<POSIX>, 
 L<Sys::Info>,
+L<Sys::Info::Device>,
 L<http://msdn.microsoft.com/library/en-us/sysinfo/base/osversioninfoex_str.asp>.
 
 =head1 AUTHOR

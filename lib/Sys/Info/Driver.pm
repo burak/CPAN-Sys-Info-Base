@@ -12,6 +12,14 @@ __END__
 
 Sys::Info::Driver - Driver base class
 
+=head1 SEE ALSO
+
+L<Sys::Info>,
+L<Sys::Info::Driver::Unknown>,
+L<Sys::Info::Driver::Windows>,
+L<Sys::Info::Driver::Linux>,
+L<Sys::Info::Driver::BSD>.
+
 =head1 AUTHOR
 
 Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>

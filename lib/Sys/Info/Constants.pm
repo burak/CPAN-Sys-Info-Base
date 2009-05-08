@@ -218,6 +218,10 @@ Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>
 
 Copyright 2006-2009 Burak Gürsoy. All rights reserved.
 
+=head1 SEE ALSO
+
+L<Sys::Info>.
+
 =head1 LICENSE
 
 This library is free software; you can redistribute it and/or modify 
