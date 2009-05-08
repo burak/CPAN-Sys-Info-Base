@@ -84,11 +84,8 @@ sub ip {
     require Sys::Hostname;
     my $host = gethostbyname Sys::Hostname::hostname() || return;
     my $ip   = Socket::inet_ntoa($host);
-    if($ip && $ip =~ m{\A 127}xms) {
-        if($self->SUPER::can('_ip')) {
-            $ip = $self->SUPER::_ip();
-        }
-    }
+    $ip = $self->SUPER::_ip()
+        if $ip && $ip =~ m{ \A 127 }xms && $self->SUPER::can('_ip');
     return $ip;
 }
 
