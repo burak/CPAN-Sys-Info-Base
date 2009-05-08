@@ -2,6 +2,9 @@ Revision history for Perl extension Sys::Info::Base.
 
 Time zone is GMT+2.
 
+0.73 Fri May  8 07:16:28 2009
+    => NEW_PERL constant.
+
 0.72 Thu Apr 23 16:36:03 2009
     => Update builder.
 

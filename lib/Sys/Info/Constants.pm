@@ -78,6 +78,8 @@ use constant UN_OS_VERSION  => 3;
 use constant UN_OS_MACHINE  => 4;
 use constant UN_RE_BUILD    => qr{\A Build \s+ (\d+) .* \z}xmsio;
 
+use constant NEW_PERL       => $] >= 5.008;
+
 @ISA = qw(Exporter);
 
 %EXPORT_TAGS = (
@@ -131,7 +133,7 @@ use constant UN_RE_BUILD    => qr{\A Build \s+ (\d+) .* \z}xmsio;
                     UN_OS_MACHINE
                     UN_RE_BUILD
                     /],
-    general     => [qw/ OSID /],
+    general     => [qw/ OSID NEW_PERL /],
 );
 
 @EXPORT_OK        = map { @{ $_ } } values %EXPORT_TAGS;
