@@ -9,6 +9,7 @@ use Carp qw( croak );
 my $POSIX;
 
 BEGIN {
+    # this check is for the Unknown driver
     local $@;
     eval {
         require POSIX;
