@@ -1,10 +1,22 @@
 package Sys::Info::OS;
 use strict;
+use subs qw( LC_TYPE );
 use vars qw( $VERSION @ISA   );
 use base qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 use Carp qw( croak );
-use POSIX qw(locale_h);
+
+my $POSIX;
+
+BEGIN {
+    local $@;
+    eval {
+        require POSIX;
+        POSIX->import( qw(locale_h) );
+        $POSIX = 1;
+    };
+    *LC_TYPE = sub () {} if $@;
+}
 
 $VERSION = '0.70';
 
@@ -91,8 +103,9 @@ sub ip {
 }
 
 sub locale {
+    return if ! $POSIX;
     my $self = shift;
-    return setlocale( LC_CTYPE );
+    return setlocale( LC_CTYPE() );
 }
 
 1;
