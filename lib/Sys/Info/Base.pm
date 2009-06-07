@@ -118,6 +118,7 @@ sub date2time { # date stamp to unix time stamp conversion
 sub uname {
     my $self = shift;
     %UNAME   = do {
+        require POSIX;
         my %u;
         @u{ qw( sysname nodename release version machine ) } = POSIX::uname();
         %u;
