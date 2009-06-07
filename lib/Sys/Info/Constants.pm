@@ -52,13 +52,6 @@ use constant LIN_MOUNT_OPTS       => 3;
 use constant LIN_DUMP_FREQ        => 4;
 use constant LIN_FS_CHECK_ORDER   => 5;
 
-# uname()
-use constant LIN_SYSNAME          => 0;
-use constant LIN_NODENAME         => 1;
-use constant LIN_RELEASE          => 2;
-use constant LIN_VERSION          => 3;
-use constant LIN_MACHINE          => 4;
-
 # getpwnam()
 use constant LIN_REAL_NAME_FIELD  => 6;
 use constant LIN_RE_LINUX_VERSION => qr{
@@ -71,11 +64,6 @@ use constant LIN_RE_LINUX_VERSION => qr{
    \z
 }xmsi;
 
-use constant UN_OS_SYSNAME  => 0;
-use constant UN_OS_NODENAME => 1;
-use constant UN_OS_RELEASE  => 2;
-use constant UN_OS_VERSION  => 3;
-use constant UN_OS_MACHINE  => 4;
 use constant UN_RE_BUILD    => qr{\A Build \s+ (\d+) .* \z}xmsio;
 
 use constant NEW_PERL       => $] >= 5.008;
@@ -117,22 +105,14 @@ use constant NEW_PERL       => $] >= 5.008;
                     LIN_MOUNT_OPTS
                     LIN_DUMP_FREQ
                     LIN_FS_CHECK_ORDER
-                    LIN_SYSNAME
-                    LIN_NODENAME
-                    LIN_RELEASE
-                    LIN_VERSION
-                    LIN_MACHINE
                     LIN_REAL_NAME_FIELD
                     LIN_RE_LINUX_VERSION
                     /],
+
     unknown     => [qw/
-                    UN_OS_SYSNAME
-                    UN_OS_NODENAME
-                    UN_OS_RELEASE
-                    UN_OS_VERSION
-                    UN_OS_MACHINE
                     UN_RE_BUILD
                     /],
+
     general     => [qw/ OSID NEW_PERL /],
 );
 
@@ -191,20 +171,8 @@ Every constant can be imported individually or via import keys:
                     LIN_MOUNT_OPTS
                     LIN_DUMP_FREQ
                     LIN_FS_CHECK_ORDER
-                    LIN_SYSNAME
-                    LIN_NODENAME
-                    LIN_RELEASE
-                    LIN_VERSION
-                    LIN_MACHINE
                     LIN_REAL_NAME_FIELD
                     LIN_RE_LINUX_VERSION
-
-    :unknown        UN_OS_SYSNAME
-                    UN_OS_NODENAME
-                    UN_OS_RELEASE
-                    UN_OS_VERSION
-                    UN_OS_MACHINE
-                    UN_RE_BUILD
 
     :general        OSID
 

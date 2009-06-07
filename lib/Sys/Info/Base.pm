@@ -9,6 +9,7 @@ use Sys::Info::Constants qw( :date OSID );
 $VERSION = '0.73';
 
 my %LOAD_MODULE; # cache
+my %UNAME;       # cache
 
 sub load_subclass { # hybrid: static+dynamic
     my $self     = shift;
@@ -18,7 +19,8 @@ sub load_subclass { # hybrid: static+dynamic
     eval { $class = $self->load_module( sprintf $template, OSID ); };
 
     if ( $@ ) {
-        warn sprintf( "Operating system identified as: '%s'. %s. "
+        warn sprintf( "Operating system identified as: '%s'. "
+                     ."Native driver can not be loaded: %s. "
                      ."Falling back to compatibility mode", OSID, $@ );
         $class = $self->load_module( sprintf $template, 'Unknown' );
     }
@@ -58,7 +60,7 @@ sub slurp { # fetches all data inside a flat file
     my $file   = shift;
     my $msgerr = shift || 'I can not open file %s for reading: ';
     my $FH     = IO::File->new;
-       $FH->open($file) or croak sprintf($msgerr, $file) . $!;
+       $FH->open( $file ) or croak sprintf($msgerr, $file) . $!;
     my $slurped = do {
        local $/;
        my $rv = <$FH>;
@@ -73,7 +75,7 @@ sub read_file {
     my $file   = shift;
     my $msgerr = shift || 'I can not open file %s for reading: ';
     my $FH     = IO::File->new;
-       $FH->open($file) or die sprintf($msgerr, $file) . $!;
+       $FH->open( $file ) or die sprintf( $msgerr, $file ) . $!;
     my @flat   = <$FH>;
     close  $FH;
     return @flat;
@@ -111,6 +113,16 @@ sub date2time { # date stamp to unix time stamp conversion
                 );
 
     return $unix;
+}
+
+sub uname {
+    my $self = shift;
+    %UNAME   = do {
+        my %u;
+        @u{ qw( sysname nodename release version machine ) } = POSIX::uname();
+        %u;
+    } if ! %UNAME;
+    return { %UNAME };
 }
 
 1;
@@ -165,6 +177,10 @@ Caches all contents of C<FILE> into an array and then returns it.
 =head2 date2time DATE_STRING
 
 Converts C<DATE_STRING> into unix timestamp.
+
+=head2 uname
+
+Returns a hashref built from C<POSIX::uname>.
 
 =head1 SEE ALSO
 
