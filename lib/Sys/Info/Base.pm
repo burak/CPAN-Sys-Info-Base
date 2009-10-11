@@ -1,27 +1,29 @@
 package Sys::Info::Base;
 use strict;
-use vars qw( $VERSION );
+use warnings;
 use IO::File;
 use Carp qw( croak );
 use File::Spec;
 use Sys::Info::Constants qw( :date OSID );
-
-$VERSION = '0.73';
+use constant DRIVER_FAIL_MSG => q{Operating system identified as: '%s'. }
+                              . q{Native driver can not be loaded: %s. }
+                              . q{Falling back to compatibility mode};
+use constant YEAR_DIFF => 1900;
+our $VERSION = '0.73';
 
 my %LOAD_MODULE; # cache
 my %UNAME;       # cache
 
 sub load_subclass { # hybrid: static+dynamic
     my $self     = shift;
-    my $template = shift || croak "Template missing for load_subclass()";
+    my $template = shift || croak 'Template missing for load_subclass()';
     my $class;
 
-    eval { $class = $self->load_module( sprintf $template, OSID ); };
+    my $eok = eval { $class = $self->load_module( sprintf $template, OSID ); };
 
-    if ( $@ ) {
-        warn sprintf( "Operating system identified as: '%s'. "
-                     ."Native driver can not be loaded: %s. "
-                     ."Falling back to compatibility mode", OSID, $@ );
+    if ( $@ || ! $eok ) {
+        my $msg = sprintf DRIVER_FAIL_MSG, OSID, $@;
+        warn "$msg\n";
         $class = $self->load_module( sprintf $template, 'Unknown' );
     }
 
@@ -30,17 +32,17 @@ sub load_subclass { # hybrid: static+dynamic
 
 sub load_module {
     my $self  = shift;
-    my $class = shift || croak "Which class to load?";
+    my $class = shift || croak 'Which class to load?';
     croak "Invalid class name: $class" if ref $class;
     return $class if $LOAD_MODULE{ $class };
     (my $check = $class) =~ tr/a-zA-Z0-9_://d;
     croak "Invalid class name: $class" if $check;
-    my @raw_file = split /::/, $class;
-    return $class if exists $INC{ join('/', @raw_file).".pm" };
+    my @raw_file = split /::/xms, $class;
+    return $class if exists $INC{ join( q{/}, @raw_file) . '.pm' };
     my $file = File::Spec->catfile( @raw_file ) . '.pm';
     (my $inc_file = $file) =~ tr///;
-    eval { require $file; };
-    croak "Error loading $class: $@" if $@;
+    my $eok = eval { require $file; };
+    croak "Error loading $class: $@" if $@ || ! $eok;
     $LOAD_MODULE{ $class } = 1;
     return $class;
 }
@@ -52,7 +54,7 @@ sub trim {
     return $str if not $str;
     $str =~ s{ \A \s+    }{}xms;
     $str =~ s{    \s+ \z }{}xms;
-    $str;
+    return $str;
 }
 
 sub slurp { # fetches all data inside a flat file
@@ -60,13 +62,13 @@ sub slurp { # fetches all data inside a flat file
     my $file   = shift;
     my $msgerr = shift || 'I can not open file %s for reading: ';
     my $FH     = IO::File->new;
-       $FH->open( $file ) or croak sprintf($msgerr, $file) . $!;
+    $FH->open( $file ) or croak sprintf($msgerr, $file) . $!;
     my $slurped = do {
        local $/;
        my $rv = <$FH>;
        $rv;
     };
-    close  $FH;
+    $FH->close;
     return $slurped;
 }
 
@@ -75,29 +77,29 @@ sub read_file {
     my $file   = shift;
     my $msgerr = shift || 'I can not open file %s for reading: ';
     my $FH     = IO::File->new;
-       $FH->open( $file ) or die sprintf( $msgerr, $file ) . $!;
+       $FH->open( $file ) or croak sprintf( $msgerr, $file ) . $!;
     my @flat   = <$FH>;
-    close  $FH;
+    $FH->close;
     return @flat;
 }
 
 sub date2time { # date stamp to unix time stamp conversion
     my $self   = shift;
-    my $stamp  = shift || die "No date input specified!";
+    my $stamp  = shift || croak 'No date input specified';
     my($i, $j) = (0,0); # index counters
     my %wdays  = map { $_ => $i++ } DATE_WEEKDAYS;
     my %months = map { $_ => $j++ } DATE_MONTHS;
-    my @junk   = split /\s+/, $stamp;
-    my $reg    = join    '|', keys %wdays;
+    my @junk   = split /\s+/xms, $stamp;
+    my $reg    = join q{|}, keys %wdays;
 
     # remove until ve get a day name
     while ( @junk && $junk[0] !~ m{ \A ($reg) \z }xmsi ) {
        shift @junk;
     }
-    return '' if ! @junk;
+    return q{} if ! @junk;
 
     my($wday, $month, $mday, $time, $zone, $year) = @junk;
-    my($hour, $min, $sec)                         = split /\:/, $time;
+    my($hour,   $min, $sec)                       = split /:/xms, $time;
 
     require POSIX;
     my $unix =  POSIX::mktime(
@@ -106,7 +108,7 @@ sub date2time { # date stamp to unix time stamp conversion
                     $hour,
                     $mday,
                     $months{$month},
-                    $year - 1900,
+                    $year - YEAR_DIFF,
                     $wdays{$wday},
                     DATE_MKTIME_YDAY,
                     DATE_MKTIME_ISDST,

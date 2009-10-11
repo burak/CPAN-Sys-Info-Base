@@ -1,18 +1,18 @@
 package Sys::Info::Device;
 use strict;
-use vars qw($VERSION);
+use warnings;
 use constant SUPPORTED => qw( CPU BIOS );
 use Carp qw( croak );
 use base qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 
-$VERSION = '0.70';
+our $VERSION = '0.70';
 
 BEGIN {
     MK_ACCESSORS: {
         no strict qw(refs);
         foreach my $device ( SUPPORTED ) {
-            *{ '_device_' . lc( $device ) } = sub {
+            *{ '_device_' . lc $device } = sub {
                 my $self = shift;
                 return  Sys::Info::Base->load_module(
                             'Sys::Info::Device::' . $device
@@ -23,14 +23,14 @@ BEGIN {
 }
 
 sub new {
-    my $class  = shift;
-    my $device = shift || croak "Device ID is missing";
+    my($class, @args) = @_;
+    my $device = shift || croak 'Device ID is missing';
     my $self   = {};
     bless $self, $class;
 
-    my $method = '_device_' . lc($device);
+    my $method = '_device_' . lc $device;
     croak "Bogus device ID: $device" if ! $self->can( $method );
-    return $self->$method( @_ ? (@_) : () );
+    return $self->$method( @args ? @args : () );
 }
 
 sub _device_available {
@@ -40,8 +40,8 @@ sub _device_available {
     my @buf;
 
     foreach my $test ( SUPPORTED ) {
-        eval { $self->new( $test ) };
-        next if $@;
+        my $eok = eval { $self->new( $test ); 1; };
+        next if $@ || ! $eok;
         push @buf, $test;
     }
 

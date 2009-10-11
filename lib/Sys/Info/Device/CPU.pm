@@ -1,33 +1,33 @@
 package Sys::Info::Device::CPU;
 use strict;
+use warnings;
 use subs qw(hyper_threading ht);
-use vars qw( $VERSION @ISA   );
 use base qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 use Carp qw( croak );
+use base __PACKAGE__->load_subclass('Sys::Info::Driver::%s::Device::CPU');
 
-$VERSION = '0.70';
+our $VERSION = '0.70';
 
 BEGIN {
-    push @ISA, __PACKAGE__->load_subclass('Sys::Info::Driver::%s::Device::CPU');
     # define aliases
     *ht = \&hyper_threading;
 }
 
 sub new {
-    my $class = shift;
-    my %opt   = scalar(@_) % 2 ? () : (@_);
+    my($class, @args) = @_;
+    my %opt   = @args % 2 ? () : @args;
     my $self  = {
         %opt,
         META_DATA => undef,
     };
     bless $self, $class;
-    $self;
+    return $self;
 }
 
 sub count {
     my $self = shift;
-    my $id   = shift || '';
+    my $id   = shift || q{};
     my @cpu  = $self->identify;
     if ( $id ) {
         croak "Parameter to count($id) if bogus" if $id ne 'cores';
@@ -62,7 +62,7 @@ sub hyper_threading {
 sub speed {
     my $self = shift;
     my @cpu  = $self->identify;
-    return if !@cpu || !ref($cpu[0]);
+    return if !@cpu || !ref $cpu[0];
     return $cpu[0]->{speed};
 }
 
@@ -79,13 +79,13 @@ sub _serve_from_cache {
     my $self    = shift;
     my $context = shift;
     return if not defined $context; # void context
-    croak "Can not happen: META_DATA is empty" if not $self->{META_DATA};
+    croak 'Can not happen: META_DATA is empty' if not $self->{META_DATA};
     return @{ $self->{META_DATA} } if $context;
     # scalar context
     my @cpu = @{ $self->{META_DATA} };
     # OK for single processor ("name" will be same)
     my $count = @cpu;
-    my $name  = $cpu[0] ? $cpu[0]->{name} : '';
+    my $name  = $cpu[0] ? $cpu[0]->{name} : q{};
     return $name if ! $count || $count == 1;
     return "$count x $name";
 }

@@ -1,5 +1,8 @@
 {
     module_name => 'Sys::Info::Base',
+    requires    => {
+        ( $] < 5.006 ? ( 'warnings::compat' => 0 ) : ()),
+    },
     meta_merge  => {
         resources => {
             repository => 'http://bitbucket.org/burak/cpan-sys-info-base/',

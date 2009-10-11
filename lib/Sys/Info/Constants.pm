@@ -1,10 +1,11 @@
 package Sys::Info::Constants;
 use strict;
-use vars qw( $VERSION @ISA @EXPORT_OK %EXPORT_TAGS );
+use warnings;
+use vars qw( @EXPORT_OK %EXPORT_TAGS );
 use Carp qw( croak );
-use Exporter ();
+use base qw( Exporter );
 
-$VERSION = '0.70';
+our $VERSION = '0.70';
 
 BEGIN {
     if ( ! defined &OSID ) {
@@ -68,9 +69,7 @@ use constant UN_RE_BUILD    => qr{\A Build \s+ (\d+) .* \z}xmsio;
 
 use constant NEW_PERL       => $] >= 5.008;
 
-@ISA = qw(Exporter);
-
-%EXPORT_TAGS = (
+our %EXPORT_TAGS = (
     device_cpu => [qw/
                     DCPU_LOAD_LAST_01
                     DCPU_LOAD_LAST_05
@@ -116,7 +115,7 @@ use constant NEW_PERL       => $] >= 5.008;
     general     => [qw/ OSID NEW_PERL /],
 );
 
-@EXPORT_OK        = map { @{ $_ } } values %EXPORT_TAGS;
+our @EXPORT_OK        = map { @{ $_ } } values %EXPORT_TAGS;
 $EXPORT_TAGS{all} = \@EXPORT_OK;
 
 1;

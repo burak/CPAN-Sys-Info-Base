@@ -7,6 +7,7 @@ Time zone is GMT+2.
     => os->locale method.
     => Base method uname().
     => Removed all constants related to uname().
+    => Perl::Critic refactoring.
 
 0.72 Thu Apr 23 16:36:03 2009
     => Update builder.

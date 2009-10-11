@@ -1,8 +1,8 @@
 package Sys::Info::Driver;
 use strict;
-use vars qw( $VERSION );
+use warnings;
 
-$VERSION = '0.70';
+our $VERSION = '0.70';
 
 1;
 
