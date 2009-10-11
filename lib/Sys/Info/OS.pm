@@ -1,6 +1,7 @@
 package Sys::Info::OS;
 use strict;
 use warnings;
+use vars qw( $VERSION );
 use subs qw( LC_TYPE );
 use vars qw( @ISA   );
 use base                 qw( Sys::Info::Base );
@@ -24,7 +25,7 @@ BEGIN {
     *LC_TYPE = sub () {} if $@ || ! $eok;
 }
 
-our $VERSION = '0.70';
+$VERSION = '0.70';
 
 BEGIN {
     CREATE_SYNONYMS_AND_UTILITY_METHODS: {

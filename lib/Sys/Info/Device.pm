@@ -1,12 +1,13 @@
 package Sys::Info::Device;
 use strict;
 use warnings;
+use vars qw( $VERSION );
 use constant SUPPORTED => qw( CPU BIOS );
 use Carp qw( croak );
 use base qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 
-our $VERSION = '0.70';
+$VERSION = '0.70';
 
 BEGIN {
     MK_ACCESSORS: {
