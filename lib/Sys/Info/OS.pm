@@ -2,11 +2,11 @@ package Sys::Info::OS;
 use strict;
 use warnings;
 use vars qw( $VERSION );
-use subs qw( LC_TYPE );
-use vars qw( @ISA   );
+use subs qw( LC_TYPE  );
+use vars qw( @ISA     );
 use base                 qw( Sys::Info::Base );
-use Sys::Info::Constants qw( OSID  );
 use Carp                 qw( croak );
+use Sys::Info::Constants qw( OSID  );
 
 use constant TARGET_CLASS => __PACKAGE__->load_subclass('Sys::Info::Driver::%s::OS');
 use base TARGET_CLASS;
@@ -22,7 +22,7 @@ BEGIN {
         $POSIX = 1;
         1;
     };
-    *LC_TYPE = sub () {} if $@ || ! $eok;
+    *LC_CTYPE = sub {} if $@ || ! $eok;
 }
 
 $VERSION = '0.70';
@@ -372,24 +372,7 @@ L<Sys::Info>,
 L<Sys::Info::Device>,
 L<http://msdn.microsoft.com/library/en-us/sysinfo/base/osversioninfoex_str.asp>.
 
-=head1 AUTHOR
-
-Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-Copyright 2006-2009 Burak Gürsoy. All rights reserved.
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify 
-it under the same terms as Perl itself, either Perl version 5.10.0 or, 
-at your option, any later version of Perl 5 you may have available.
-
 =cut
-
-
-
 
 use Socket;
 sub network_name {
@@ -399,9 +382,6 @@ sub network_name {
    my $name  = gethostbyaddr($iaddr, AF_INET);
    return $name || $ip;
 }
-
-
-
 
 #<TODO>
 sub disk_quota {}

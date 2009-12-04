@@ -10,6 +10,7 @@ use constant DRIVER_FAIL_MSG => q{Operating system identified as: '%s'. }
                               . q{Native driver can not be loaded: %s. }
                               . q{Falling back to compatibility mode};
 use constant YEAR_DIFF => 1900;
+
 $VERSION = '0.73';
 
 my %LOAD_MODULE; # cache
@@ -34,14 +35,13 @@ sub load_subclass { # hybrid: static+dynamic
 sub load_module {
     my $self  = shift;
     my $class = shift || croak 'Which class to load?';
-    croak "Invalid class name: $class" if ref $class;
     return $class if $LOAD_MODULE{ $class };
+    croak "Invalid class name: $class" if ref $class;
     (my $check = $class) =~ tr/a-zA-Z0-9_://d;
     croak "Invalid class name: $class" if $check;
     my @raw_file = split /::/xms, $class;
     return $class if exists $INC{ join( q{/}, @raw_file) . '.pm' };
     my $file = File::Spec->catfile( @raw_file ) . '.pm';
-    (my $inc_file = $file) =~ tr///;
     my $eok = eval { require $file; };
     croak "Error loading $class: $@" if $@ || ! $eok;
     $LOAD_MODULE{ $class } = 1;
@@ -78,7 +78,7 @@ sub read_file {
     my $file   = shift;
     my $msgerr = shift || 'I can not open file %s for reading: ';
     my $FH     = IO::File->new;
-       $FH->open( $file ) or croak sprintf( $msgerr, $file ) . $!;
+    $FH->open( $file ) or croak sprintf( $msgerr, $file ) . $!;
     my @flat   = <$FH>;
     $FH->close;
     return @flat;
@@ -189,19 +189,5 @@ Returns a hashref built from C<POSIX::uname>.
 =head1 SEE ALSO
 
 L<Sys::Info>.
-
-=head1 AUTHOR
-
-Burak Gürsoy, E<lt>burakE<64>cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-Copyright 2006-2009 Burak Gürsoy. All rights reserved.
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify 
-it under the same terms as Perl itself, either Perl version 5.10.0 or, 
-at your option, any later version of Perl 5 you may have available.
 
 =cut
