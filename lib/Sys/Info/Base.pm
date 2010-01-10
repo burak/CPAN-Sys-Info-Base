@@ -40,11 +40,13 @@ sub load_module {
     (my $check = $class) =~ tr/a-zA-Z0-9_://d;
     croak "Invalid class name: $class" if $check;
     my @raw_file = split /::/xms, $class;
-    return $class if exists $INC{ join( q{/}, @raw_file) . '.pm' };
+	my $inc_file = join( q{/}, @raw_file) . '.pm';
+    return $class if exists $INC{ $inc_file };
     my $file = File::Spec->catfile( @raw_file ) . '.pm';
     my $eok = eval { require $file; };
     croak "Error loading $class: $@" if $@ || ! $eok;
     $LOAD_MODULE{ $class } = 1;
+    $INC{ $inc_file } = $file;
     return $class;
 }
 

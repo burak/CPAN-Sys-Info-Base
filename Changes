@@ -2,7 +2,7 @@ Revision history for Perl extension Sys::Info::Base.
 
 Time zone is GMT+2.
 
-0.73 Fri Dec  4 04:17:06 2009
+0.73 Sun Jan 10 07:36:19 2010
     => NEW_PERL constant.
     => os->locale method.
     => Base method uname().
