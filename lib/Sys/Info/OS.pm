@@ -341,8 +341,11 @@ Synonyms:
 
 =item *
 
-I don't have any access to any other os, so this module
-(currently) only supports Windows & Linux. Windows support is better.
+I don't have access to all operating systems in the world, so this module
+(currently) only supports Windows, Linux and (Free)BSD. Windows support is better.
+If you want support for some other OS, you'll need to write the driver
+yourself. Anything other than natively supported systems will fall-back
+to the generic C<Unknown> driver which has I<very> limited capabilities.
 
 =item *
 
@@ -362,6 +365,10 @@ Filesystem [Windows]
 File system information can not be extracted under restricted
 environments. If this is the case, we'll get an
 I<access is denied> error.
+
+=item *
+
+Bitness has some problems [Linux, BSD], especially on the os side.
 
 =back
 
