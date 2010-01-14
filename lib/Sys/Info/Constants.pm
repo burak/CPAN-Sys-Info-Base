@@ -5,6 +5,8 @@ use vars qw( $VERSION @EXPORT_OK %EXPORT_TAGS );
 use Carp qw( croak );
 use base qw( Exporter );
 
+$VERSION = '0.73';
+
 BEGIN {
     if ( ! defined &OSID ) {
         my %OS = (
