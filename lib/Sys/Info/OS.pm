@@ -140,17 +140,17 @@ Example:
    my %fs = $os->fs;
    print Data::Dumper->Dump([\%fs], ['*FILE_SYSTEM']);
    
-   print  "B1ll G4teZ rull4z!\n" if $os->is_windows;
-   print  "Pinguin detected!\n"  if $os->is_linux;
-   if($os->is_windows) {
+   print "B1ll G4teZ rull4z!\n" if $os->is_windows;
+   print "Pinguin detected!\n"  if $os->is_linux;
+   if ( $os->is_windows ) {
       printf "This is a %s based system\n", $os->is_winnt ? 'NT' : '9.x';
    }
    printf "Operating System: %s\n", $os->name( long => 1 );
    
-   my $user = $os->login_name_real || $os->login_name || 'User';
+   my $user = $os->login_name( real => 1 ) || $os->login_name || 'User';
    print "$user, You've Got The P.O.W.E.R.!\n" if $os->is_root;
    
-   if(my $up = $os->uptime) {
+   if ( my $up = $os->uptime ) {
       my $tick = $os->tick_count;
       printf "Running since %s\n"   , scalar localtime $up;
       printf "Uptime: %.2f hours\n" , $tick / (60*60      ); # probably windows
