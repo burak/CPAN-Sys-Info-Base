@@ -22,7 +22,7 @@ BEGIN {
         $POSIX = 1;
         1;
     };
-    *LC_CTYPE = sub {} if $@ || ! $eok;
+    *LC_CTYPE = sub () {} if $@ || ! $eok;
 }
 
 $VERSION = '0.70';

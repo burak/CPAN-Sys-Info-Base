@@ -11,7 +11,7 @@ use constant DRIVER_FAIL_MSG => q{Operating system identified as: '%s'. }
                               . q{Falling back to compatibility mode};
 use constant YEAR_DIFF => 1900;
 
-$VERSION = '0.73';
+$VERSION = '0.74';
 
 my %LOAD_MODULE; # cache
 my %UNAME;       # cache
@@ -34,7 +34,7 @@ sub load_subclass { # hybrid: static+dynamic
 
 sub load_module {
     my $self  = shift;
-    my $class = shift || croak 'Which class to load?';
+    my $class = shift || croak 'No class name specified for load_module()';
     return $class if $LOAD_MODULE{ $class };
     croak "Invalid class name: $class" if ref $class;
     (my $check = $class) =~ tr/a-zA-Z0-9_://d;
@@ -43,7 +43,7 @@ sub load_module {
     my $inc_file = join( q{/}, @raw_file) . '.pm';
     return $class if exists $INC{ $inc_file };
     my $file = File::Spec->catfile( @raw_file ) . '.pm';
-    my $eok = eval { require $file; };
+    my $eok  = eval { require $file; };
     croak "Error loading $class: $@" if $@ || ! $eok;
     $LOAD_MODULE{ $class } = 1;
     $INC{ $inc_file } = $file;
@@ -51,10 +51,8 @@ sub load_module {
 }
 
 sub trim {
-    my $self = shift;
-    my $str  = shift;
-    return if not defined $str;
-    return $str if not $str;
+    my($self, $str) = @_;
+    return $str if ! $str;
     $str =~ s{ \A \s+    }{}xms;
     $str =~ s{    \s+ \z }{}xms;
     return $str;
@@ -96,7 +94,7 @@ sub date2time { # date stamp to unix time stamp conversion
     my $reg    = join q{|}, keys %wdays;
 
     # remove until ve get a day name
-    while ( @junk && $junk[0] !~ m{ \A ($reg) \z }xmsi ) {
+    while ( @junk && $junk[0] !~ m{ \A $reg \z }xmsi ) {
        shift @junk;
     }
     return q{} if ! @junk;

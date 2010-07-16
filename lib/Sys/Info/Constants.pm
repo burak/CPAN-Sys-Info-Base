@@ -60,12 +60,12 @@ use constant LIN_RE_LINUX_VERSION => qr{
    Linux \s+ version \s
    (.+?)
    \s
-   \( .+? \@ .+? \)
+   [(] .+? \@ .+? [)]
    (.*?)
    \z
 }xmsi;
 
-use constant UN_RE_BUILD    => qr{\A Build \s+ (\d+) .* \z}xmsio;
+use constant UN_RE_BUILD    => qr{\A Build \s+ (\d+) .* \z}xmsi;
 
 use constant NEW_PERL       => $] >= 5.008;
 
