@@ -367,6 +367,10 @@ Sys::Info::Helper - Helps to create new Sys::Info drivers.
 
 =head1 DESCRIPTION
 
+=head1 METHODS
+
+=head2 new
+
 =head1 FUNCTIONS
 
 =head2 new_driver

@@ -5,6 +5,22 @@ use Test::More qw( no_plan );
 use File::Spec;
 use constant FILE => File::Spec->catfile( qw( t slurp.txt ) );
 
+use Sys::Info::Constants qw( OSID );
+
+BEGIN {
+    my @fakes =
+        map { sprintf $_, OSID() }
+        qw(
+            Sys::Info::Driver::%s::Device::CPU
+            Sys::Info::Driver::%s::OS
+        );
+    foreach my $class ( @fakes ) {
+        (my $file = $class) =~ s{::}{/}xmsg;
+        $file .= q(.pm);
+        $INC{ $file } = $class;
+    }
+}
+
 # Sys::Info::Device::CPU
 # Sys::Info::Device
 # Sys::Info::OS
@@ -12,10 +28,8 @@ use constant FILE => File::Spec->catfile( qw( t slurp.txt ) );
 
 # TODO: interface test for Sys::Info::Constants
 
-BEGIN {
-    use_ok('Sys::Info::Base');
-    use_ok('Sys::Info::Driver');
-}
+use Sys::Info::Base;
+use Sys::Info::Driver;
 
 is( Sys::Info::Base->slurp(FILE), 'slurp', 'slurp() works' );
 ok( Sys::Info::Base->load_module('CGI'), 'load_module() works');
