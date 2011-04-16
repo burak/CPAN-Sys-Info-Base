@@ -5,7 +5,7 @@ use vars qw( $VERSION @EXPORT_OK %EXPORT_TAGS );
 use Carp qw( croak );
 use base qw( Exporter );
 
-$VERSION = '0.73';
+$VERSION = '0.78';
 
 BEGIN {
     if ( ! defined &OSID ) {
@@ -13,7 +13,7 @@ BEGIN {
             MSWin32  => 'Windows',
             MSWin64  => 'Windows',
             linux    => 'Linux',
-            #darwin   => 'MacOSX',
+            darwin   => 'MacOSX',
         );
         $OS{$_} = 'BSD' for qw( freebsd openbsd netbsd );
         my $ID = $OS{ $^O } || 'Unknown';
