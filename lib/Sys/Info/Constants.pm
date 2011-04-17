@@ -13,7 +13,7 @@ BEGIN {
             MSWin32  => 'Windows',
             MSWin64  => 'Windows',
             linux    => 'Linux',
-            darwin   => 'MacOSX',
+            darwin   => 'OSX',
         );
         $OS{$_} = 'BSD' for qw( freebsd openbsd netbsd );
         my $ID = $OS{ $^O } || 'Unknown';
