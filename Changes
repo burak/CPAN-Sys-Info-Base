@@ -1,5 +1,8 @@
 Revision history for Perl extension Sys::Info::Base.
 
+0.7801 Sun Jul 31 01:39:17 2011
+   => Remove Linux specific constants.
+
 0.78 Sat Apr 16 15:18:44 2011
    => Enable OSX driver
 

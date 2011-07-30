@@ -11,7 +11,7 @@ use constant DRIVER_FAIL_MSG => q{Operating system identified as: '%s'. }
                               . q{Falling back to compatibility mode};
 use constant YEAR_DIFF => 1900;
 
-$VERSION = '0.78';
+$VERSION = '0.7801';
 
 my %LOAD_MODULE; # cache
 my %UNAME;       # cache
