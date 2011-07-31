@@ -1,5 +1,8 @@
 Revision history for Perl extension Sys::Info::Base.
 
+0.7802 Sun Jul 31 03:21:23 2011
+   => Fix device('available'). Reported by Matthäus Kiem.
+
 0.7801 Sun Jul 31 01:39:17 2011
    => Remove Linux specific constants.
 

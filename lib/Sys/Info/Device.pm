@@ -35,13 +35,14 @@ sub new {
 }
 
 sub _device_available {
-    my $self = shift;
+    my $self  = shift;
+    my $class = ref $self || $self;;
+    my @buf;
     local $@;
     local $SIG{__DIE__};
-    my @buf;
 
     foreach my $test ( SUPPORTED ) {
-        my $eok = eval { $self->new( $test ); 1; };
+        my $eok = eval { $class->new( $test ); 1; };
         next if $@ || ! $eok;
         push @buf, $test;
     }
