@@ -36,7 +36,7 @@ sub new {
 
 sub _device_available {
     my $self  = shift;
-    my $class = ref $self || $self;;
+    my $class = ref $self || $self;
     my @buf;
     local $@;
     local $SIG{__DIE__};
