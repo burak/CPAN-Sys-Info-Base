@@ -1,5 +1,8 @@
 Revision history for Perl extension Sys::Info::Base.
 
+0.7803 Fri May 10 01:06:29 EEST 2013
+   => Bump version for new release.
+
 0.7802 Sun Jul 31 03:21:23 2011
    => Fix device('available'). Reported by Matthäus Kiem.
 
