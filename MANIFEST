@@ -6,6 +6,7 @@ lib/Sys/Info/OS.pm
 lib/Sys/Info/Device/CPU.pm
 t/03-basic.t
 t/slurp.txt
+t/lib/MyLoadableThing.pm
 Build.PL
 Changes
 MANIFEST
