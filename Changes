@@ -1,6 +1,7 @@
 Revision history for Perl extension Sys::Info::Base.
 
 {{$NEXT}}
+    - Distro fix.
 
 0.7805 2018-12-25 BURAK
     - Migrate to dzil.
