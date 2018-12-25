@@ -1,8 +1,7 @@
 package Sys::Info::Helper;
-use 5.006;
+
 use strict;
 use warnings;
-use vars qw( $VERSION @EXPORT );
 use base qw(Exporter);
 use File::Spec::Functions qw( catdir catfile );
 use File::Path;
@@ -12,8 +11,7 @@ use Carp qw( croak );
 use Data::Dumper;
 use Text::Template::Simple;
 
-$VERSION = '0.10';
-@EXPORT  = qw( new_driver );
+our @EXPORT  = qw( new_driver );
 
 sub new {
     my($class, @args) = @_;

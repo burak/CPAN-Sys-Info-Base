@@ -1,7 +1,8 @@
 package Sys::Info::Base;
+
 use strict;
 use warnings;
-use vars qw( $VERSION );
+
 use IO::File;
 use Carp qw( croak );
 use File::Spec;
@@ -10,8 +11,6 @@ use constant DRIVER_FAIL_MSG => q{Operating system identified as: '%s'. }
                               . q{Native driver can not be loaded: %s. }
                               . q{Falling back to compatibility mode};
 use constant YEAR_DIFF => 1900;
-
-$VERSION = '0.7804';
 
 my %LOAD_MODULE; # cache
 my %UNAME;       # cache

@@ -1,9 +1,8 @@
 package Sys::Info::OS;
+
 use strict;
 use warnings;
-use vars qw( $VERSION );
 use subs qw( LC_TYPE  );
-use vars qw( @ISA     );
 use base                 qw( Sys::Info::Base );
 use Carp                 qw( croak );
 use Sys::Info::Constants qw( OSID  );
@@ -24,8 +23,6 @@ BEGIN {
     };
     *LC_CTYPE = sub () {} if $@ || ! $eok;
 }
-
-$VERSION = '0.70';
 
 BEGIN {
     CREATE_SYNONYMS_AND_UTILITY_METHODS: {

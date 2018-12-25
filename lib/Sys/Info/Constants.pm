@@ -1,11 +1,10 @@
 package Sys::Info::Constants;
+
 use strict;
 use warnings;
-use vars qw( $VERSION @EXPORT_OK %EXPORT_TAGS );
+
 use Carp qw( croak );
 use base qw( Exporter );
-
-$VERSION = '0.78';
 
 BEGIN {
     if ( ! defined &OSID ) {
@@ -47,7 +46,7 @@ use constant NEW_PERL       => $] >= 5.008;
 
 use constant USER_REAL_NAME_FIELD => 6;
 
-%EXPORT_TAGS = (
+our %EXPORT_TAGS = (
     device_cpu => [qw/
                     DCPU_LOAD_LAST_01
                     DCPU_LOAD_LAST_05
@@ -85,7 +84,7 @@ use constant USER_REAL_NAME_FIELD => 6;
                 /],
 );
 
-@EXPORT_OK        = map { @{ $_ } } values %EXPORT_TAGS;
+our @EXPORT_OK        = map { @{ $_ } } values %EXPORT_TAGS;
 $EXPORT_TAGS{all} = \@EXPORT_OK;
 
 1;
