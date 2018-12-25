@@ -1,6 +1,8 @@
 Revision history for Perl extension Sys::Info::Base.
 
 {{$NEXT}}
+
+0.7807 2018-12-25 BURAK
     - Distro fix.
 
 0.7806 2018-12-25 BURAK
