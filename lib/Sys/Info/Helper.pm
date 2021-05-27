@@ -2,7 +2,7 @@ package Sys::Info::Helper;
 
 use strict;
 use warnings;
-use base qw(Exporter);
+use parent qw(Exporter);
 use File::Spec::Functions qw( catdir catfile );
 use File::Path;
 use File::Basename;
@@ -136,7 +136,7 @@ Sys::Info::Driver::<%ID%>::Device - Base class for <%ID%> device drivers
 
 =head1 SYNOPSIS
 
-    use base qw( Sys::Info::Driver::<%ID%>::Device );
+    use parent qw( Sys::Info::Driver::<%ID%>::Device );
 
 =head1 DESCRIPTION
 
@@ -184,7 +184,7 @@ package Sys::Info::Driver::<%ID%>::Device::CPU;
 use strict;
 use warnings;
 use vars qw($VERSION);
-use base qw(Sys::Info::Base);
+use parent qw(Sys::Info::Base);
 
 $VERSION = '0.10';
 
@@ -251,7 +251,7 @@ package Sys::Info::Driver::<%ID%>::OS;
 use strict;
 use warnings;
 use vars qw( $VERSION );
-use base qw( Sys::Info::Base );
+use parent qw( Sys::Info::Base );
 
 $VERSION = '0.10';
 

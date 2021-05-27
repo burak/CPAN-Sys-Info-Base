@@ -139,7 +139,7 @@ Sys::Info::Base - Base class for Sys::Info
 
 =head1 SYNOPSIS
 
-    use base qw(Sys::Info::Base);
+    use parent qw(Sys::Info::Base);
     #...
     sub foo {
         my $self = shift;

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Carp qw( croak );
-use base qw( Exporter );
+use parent qw( Exporter );
 
 BEGIN {
     if ( ! defined &OSID ) {

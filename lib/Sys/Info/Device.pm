@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use constant SUPPORTED => qw( CPU BIOS );
 use Carp qw( croak );
-use base qw( Sys::Info::Base );
+use parent qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 
 BEGIN {

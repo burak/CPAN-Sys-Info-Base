@@ -3,10 +3,10 @@ package Sys::Info::Device::CPU;
 use strict;
 use warnings;
 use subs qw(hyper_threading ht);
-use base qw( Sys::Info::Base );
+use parent qw( Sys::Info::Base );
 use Sys::Info::Constants qw( OSID );
 use Carp qw( croak );
-use base __PACKAGE__->load_subclass('Sys::Info::Driver::%s::Device::CPU');
+use parent __PACKAGE__->load_subclass('Sys::Info::Driver::%s::Device::CPU');
 
 BEGIN {
     # define aliases
