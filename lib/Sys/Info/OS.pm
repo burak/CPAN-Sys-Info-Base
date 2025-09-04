@@ -97,9 +97,31 @@ sub meta {
 sub ip {
     my $self   = shift;
     my $hostip = Sys::HostIP->new;
-    my $ip     = $hostip->ip;;
-    $ip = $self->SUPER::_ip()
-        if $ip && $ip =~ m{ \A 127 }xms && $self->SUPER::can('_ip');
+    my $int    = $hostip->interfaces;
+
+    my $ip;
+    if ( my $eth = $int->{eth0} ) {
+        $ip = $eth;
+    }
+    else {
+        my @devs = keys %{ $int };
+
+        my @junk_keys = grep {
+            m{ docker[0-9]+ }xms
+        } @devs;
+        delete @{ $ip }->{ @junk_keys} if @junk_keys;
+
+        if ( my $i_feel_lucky = $devs[ rand @devs ] ) {
+            $ip = $i_feel_lucky;
+        }
+    }
+
+    if (
+            $ip && $ip =~ m{ \A 127 }xms
+        &&  $self->SUPER::can('_ip')
+    ) {
+        $ip = $self->SUPER::_ip()
+    }
     return $ip;
 }
 

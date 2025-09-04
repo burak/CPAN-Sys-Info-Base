@@ -1,6 +1,7 @@
 Revision history for Perl extension Sys::Info::Base.
 
 {{$NEXT}}
+    - Filter out junk ips.
 
 0.7808 2025-08-29 BURAK
     - Release the Sys::HostIP change.
