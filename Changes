@@ -1,6 +1,8 @@
 Revision history for Perl extension Sys::Info::Base.
 
 {{$NEXT}}
+    - Returned the device id instead of ip in the previous version.
+    - Filter out the localhost.
 
 0.7809 2025-09-04 BURAK
     - Filter out junk ips.

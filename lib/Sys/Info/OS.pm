@@ -12,6 +12,11 @@ use Sys::Info::Constants qw( OSID  );
 use constant TARGET_CLASS => __PACKAGE__->load_subclass('Sys::Info::Driver::%s::OS');
 use parent TARGET_CLASS;
 
+use constant {
+    LOCALHOST_IP      => '127.0.0.1',
+    RE_IS_JUNK_DEVICE => qr{ docker[0-9]+ }xms,
+};
+
 my $POSIX;
 
 BEGIN {
@@ -107,12 +112,20 @@ sub ip {
         my @devs = keys %{ $int };
 
         my @junk_keys = grep {
-            m{ docker[0-9]+ }xms
+            $_ =~ RE_IS_JUNK_DEVICE
         } @devs;
-        delete @{ $ip }->{ @junk_keys} if @junk_keys;
+
+        delete @{ $ip }->{ @junk_keys}
+            if @junk_keys;
+
+        for my $type ( keys %{ $int } ) {
+            if ( $int->{ $type } eq LOCALHOST_IP ) {
+                delete $int->{ $type };
+            }
+        }
 
         if ( my $i_feel_lucky = $devs[ rand @devs ] ) {
-            $ip = $i_feel_lucky;
+            $ip = $int->{ $i_feel_lucky };
         }
     }
 
