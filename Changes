@@ -1,6 +1,8 @@
 Revision history for Perl extension Sys::Info::Base.
 
 {{$NEXT}}
+
+0.7809 2025-09-04 BURAK
     - Filter out junk ips.
 
 0.7808 2025-08-29 BURAK
