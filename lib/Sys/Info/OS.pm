@@ -108,6 +108,9 @@ sub ip {
     if ( my $eth = $int->{eth0} ) {
         $ip = $eth;
     }
+    elsif ( my $en = $int->{en0} ) { # macos
+        $ip = $en;
+    }
     else {
         my @devs = keys %{ $int };
 
